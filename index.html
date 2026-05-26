@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Manaus Studio</title>
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      scroll-behavior:smooth;
+    }
+
+    body{
+      font-family:Arial, Helvetica, sans-serif;
+      background:#0f0f0f;
+      color:#e5e5e5;
+      overflow-x:hidden;
+    }
+
+    a{
+      text-decoration:none;
+      color:inherit;
+    }
+
+    /* ================= NAVBAR ================= */
+
+    nav{
+      position:fixed;
+      width:100%;
+      top:0;
+      z-index:1000;
+      background:rgba(10,10,10,0.92);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid #1f1f1f;
+    }
+
+    .nav-container{
+      width:90%;
+      max-width:1300px;
+      margin:auto;
+      padding:22px 0;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+
+    .logo{
+      font-size:1.7rem;
+      font-weight:900;
+      letter-spacing:4px;
+      color:#d10000;
+      text-transform:uppercase;
+    }
+
+    .nav-links{
+      display:flex;
+      gap:30px;
+      color:#b5b5b5;
+    }
+
+    .nav-links a{
+      transition:0.3s;
+    }
+
+    .nav-links a:hover{
+      color:#ffffff;
+    }
+
+    /* ================= HERO ================= */
+
+    .hero{
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      position:relative;
+      background:
+        linear-gradient(rgba(0,0,0,0.88), rgba(0,0,0,0.97)),
+  url("ghosthouse.jpg?q=80&w=1600&auto=format&fit=crop");
+      background-size:cover;
+      background-position:center;
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at center,
+        rgba(180,0,0,0.15),
+        transparent 60%);
+    }
+
+    .hero-content{
+      position:relative;
+      z-index:2;
+      width:90%;
+      max-width:1000px;
+    }
+
+    .tag{
+      display:inline-block;
+      padding:10px 20px;
+      border:1px solid #2f2f2f;
+      background:#161616;
+      border-radius:50px;
+      color:#999;
+      margin-bottom:30px;
+      letter-spacing:1px;
+    }
+
+    h1{
+      font-size:clamp(3.5rem, 8vw, 7rem);
+      line-height:0.9;
+      margin-bottom:30px;
+      text-transform:uppercase;
+      letter-spacing:3px;
+    }
+
+    .red{
+      color:#c40000;
+      text-shadow:0 0 20px rgba(255,0,0,0.35);
+    }
+
+    .hero p{
+      max-width:700px;
+      margin:auto;
+      color:#b0b0b0;
+      line-height:1.8;
+      font-size:1.1rem;
+    }
+
+    .hero-buttons{
+      margin-top:40px;
+      display:flex;
+      justify-content:center;
+      gap:20px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      padding:16px 34px;
+      border:none;
+      border-radius:8px;
+      font-weight:bold;
+      cursor:pointer;
+      transition:0.3s;
+      letter-spacing:1px;
+      text-transform:uppercase;
+    }
+
+    .btn-primary{
+      background:#b00000;
+      color:white;
+      box-shadow:0 0 20px rgba(255,0,0,0.2);
+    }
+
+    .btn-primary:hover{
+      background:#d10000;
+      transform:translateY(-3px);
+    }
+
+    .btn-secondary{
+      background:#1a1a1a;
+      color:#e5e5e5;
+      border:1px solid #2d2d2d;
+    }
+
+    .btn-secondary:hover{
+      background:#242424;
+    }
+
+    /* ================= SECTIONS ================= */
+
+    section{
+      padding:110px 0;
+    }
+
+    .container{
+      width:90%;
+      max-width:1250px;
+      margin:auto;
+    }
+
+    .section-title{
+      text-align:center;
+      margin-bottom:70px;
+    }
+
+    .section-title h2{
+      font-size:3rem;
+      color:#c40000;
+      margin-bottom:20px;
+      text-transform:uppercase;
+      letter-spacing:2px;
+    }
+
+    .section-title p{
+      max-width:700px;
+      margin:auto;
+      color:#9d9d9d;
+      line-height:1.8;
+    }
+
+    /* ================= GAMES ================= */
+
+    .games-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+      gap:30px;
+    }
+
+    .game-card{
+      background:#171717;
+      border:1px solid #262626;
+      border-radius:18px;
+      overflow:hidden;
+      transition:0.4s;
+    }
+
+    .game-card:hover{
+      transform:translateY(-10px);
+      border-color:#800000;
+      box-shadow:0 0 30px rgba(255,0,0,0.12);
+    }
+
+    .game-image{
+      height:240px;
+      background-size:cover;
+      background-position:center;
+      filter:grayscale(20%);
+    }
+
+    .game-content{
+      padding:28px;
+    }
+
+    .game-content h3{
+      color:#d10000;
+      margin-bottom:15px;
+      font-size:1.6rem;
+    }
+
+    .game-content p{
+      color:#b5b5b5;
+      line-height:1.8;
+      margin-bottom:20px;
+    }
+
+    .badge{
+      display:inline-block;
+      padding:8px 15px;
+      background:#2a0000;
+      border:1px solid #5a0000;
+      color:#ff4d4d;
+      border-radius:40px;
+      font-size:0.85rem;
+      letter-spacing:1px;
+    }
+
+    /* ================= ABOUT ================= */
+
+    .about{
+      background:#121212;
+    }
+
+    .about-wrapper{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+      gap:60px;
+      align-items:center;
+    }
+
+    .about-text h2{
+      color:#c40000;
+      font-size:3rem;
+      margin-bottom:25px;
+      text-transform:uppercase;
+    }
+
+    .about-text p{
+      color:#b0b0b0;
+      line-height:1.9;
+      margin-bottom:20px;
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:20px;
+    }
+
+    .stat{
+      background:#1a1a1a;
+      padding:30px;
+      border-radius:16px;
+      border:1px solid #252525;
+    }
+
+    .stat h3{
+      color:#d10000;
+      font-size:2.2rem;
+      margin-bottom:10px;
+    }
+
+    .stat p{
+      color:#9d9d9d;
+    }
+
+    /* ================= CTA ================= */
+
+    .cta{
+      text-align:center;
+      background:
+         linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.98)),
+  url("ghosthouse.jpg?q=80&w=1600&auto=format&fit=crop");
+      background-size:cover;
+      background-position:center;
+    }
+
+    .cta-box{
+      max-width:900px;
+      margin:auto;
+    }
+
+    .cta h2{
+      font-size:3rem;
+      color:#d10000;
+      margin-bottom:25px;
+      text-transform:uppercase;
+    }
+
+    .cta p{
+      color:#c5c5c5;
+      line-height:1.8;
+      margin-bottom:35px;
+    }
+
+    /* ================= FOOTER ================= */
+
+    footer{
+      background:#0a0a0a;
+      border-top:1px solid #1d1d1d;
+      padding:35px 0;
+      text-align:center;
+      color:#666;
+      font-size:0.95rem;
+    }
+
+    /* ================= MOBILE ================= */
+
+    @media(max-width:768px){
+
+      .nav-links{
+        display:none;
+      }
+
+      h1{
+        font-size:4rem;
+      }
+
+      .section-title h2,
+      .about-text h2,
+      .cta h2{
+        font-size:2.2rem;
+      }
+
+      .stats{
+        grid-template-columns:1fr;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+
+  <nav>
+    <div class="nav-container">
+
+      <div class="logo">Manaus Studio</div>
+
+      <div class="nav-links">
+        <a href="#games">Games</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <div class="hero-content">
+
+      <!--div class="tag">
+        Horror Game Development Studio
+      </div-->
+
+      <h1>
+        Welcome to <span class="red">Manaus Studio</span>
+      </h1>
+
+      <p>
+        Manaus Studio was built to create games that ruin your pants from laughter and fright.
+      </p>
+
+      <div class="hero-buttons">
+
+        <a href="#games">
+          <button class="btn btn-primary">View Games</button>
+        </a>
+
+        <a href="#contact">
+          <button class="btn btn-secondary">Contact us</button>
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- GAMES -->
+
+  <section id="games">
+
+    <div class="container">
+
+      <div class="section-title">
+
+        <h2>Our Games</h2>
+
+        <p>
+          Dark stories. Dark humor. Just, dark.
+        </p>
+
+      </div>
+
+      <div class="games-grid">
+
+        <!-- GAME 1 -->
+
+        <div class="game-card">
+
+          <div class="game-image"
+            style="background-image:url('banneri_nologo.png');">
+          </div>
+
+          <div class="game-content">
+
+            <h3>Lightswitch</h3>
+
+            <p>
+                Kidnapped from his bed by the monsters everyone told were not real, Timmy needs to find his way back home.
+            </p>
+
+            <span class="badge">Coming Soon</span>
+            <span class="badge">Wishlist available</span>
+
+          </div>
+
+        </div>
+
+        <!-- GAME 2 -->
+
+        <div class="game-card">
+
+          <div class="game-image"
+            style="background-image:url('ghosthouse.jpg?b=1&s=612x612&w=0&k=20&c=WgbMGyUB6osqsAUD5MZycLH9Ln4pO5jPkA5LfRT6A3E=?q=80&w=1200&auto=format&fit=crop');">
+          </div>
+
+          <div class="game-content">
+
+            <h3>Manaus</h3>
+
+            <p>
+              A society of cryptid hunters - Manaus - needs your help identifying, purifying and recording these cases.
+            </p>
+
+            <span class="badge">Prototype</span>
+
+          </div>
+
+        </div>
+
+        <!-- GAME 3 -->
+
+        <div class="game-card">
+
+          <div class="game-image"
+            style="background-image:url('hotel.jpg?q=80&w=1200&auto=format&fit=crop');">
+          </div>
+
+          <div class="game-content">
+
+            <h3>Nightcare</h3>
+
+            <p>
+              Your first nightshift. The computer makes a sound and you get your instructions. Follow them, no matter how odd you think they are. You were warned.
+            </p>
+
+            <span class="badge">Prototype</span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ABOUT -->
+
+  <section class="about" id="about">
+
+    <div class="container">
+
+      <div class="about-wrapper">
+
+        <div class="about-text">
+
+          <h2>About Manaus Studio</h2>
+
+          <p>
+            Manaus Studio is an independent game studio with passion for horror.
+          </p>
+
+          <p>
+            Inspired by literature, movies, folk lore and original madness of our own minds, we aim to make games filled with moments where you begin to question our mental stability.
+          </p>
+
+          <p>
+
+          </p>
+
+        </div>
+
+        <div class="stats">
+
+          <div class="stat">
+            <h3>3+</h3>
+            <p>Horror Projects</p>
+          </div>
+
+          <div class="stat">
+            <h3>2</h3>
+            <p>Developers & Artists</p>
+          </div>
+
+          <div class="stat">
+            <h3>120</h3>
+            <p>Horror movies watched instead of making the games we should be making</p>
+          </div>
+
+          <div class="stat">
+            <h3>364</h3>
+            <p>Times woken up from nightmares to write them down in a notebook</p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- CTA -->
+
+  <section class="cta" id="contact">
+
+    <div class="container">
+
+      <div class="cta-box">
+
+        <h2>Questions?</h2>
+
+        <p>
+          If you wish to contact us, press the button below. It does nothing - but it's there.
+        </p>
+
+        <button class="btn btn-primary">
+          Contact Us
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+
+  <footer>
+    © 2026 Manaus Studio — All Rights Reserved.
+  </footer>
+
+</body>
+</html>
